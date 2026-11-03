@@ -10,6 +10,8 @@
    which `orch.py cost` sums per task and per agent.
 Each agent is blocked at most hooks.max_blocks times, then the orchestrator decides.
 """
+from __future__ import annotations
+
 import fnmatch
 import json
 import sys

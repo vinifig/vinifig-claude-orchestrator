@@ -100,7 +100,11 @@ def parse_yaml(text: str):
 
     def scalar(s: str):
         s = s.strip()
-        if " #" in s and not s.startswith(("'", '"')):
+        if s[:1] in ("'", '"'):
+            end = s.find(s[0], 1)
+            if end > 0 and s[end + 1:].strip().startswith("#"):
+                s = s[: end + 1]  # "quoted"  # comment
+        elif " #" in s:
             s = s.split(" #", 1)[0].rstrip()
         if s in ("", "~", "null"):
             return None

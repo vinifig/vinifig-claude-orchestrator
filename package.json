@@ -1,0 +1,17 @@
+{
+  "name": "vinifig-claude-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code orchestrator (initiative, epic and task flows, review agents, hooks) installable into any repository with stack presets.",
+  "license": "UNLICENSED",
+  "bin": {
+    "vinifig-claude-orchestrator": "bin/vinifig-claude-orchestrator.js"
+  },
+  "files": ["bin/", "installer/", "core/", "presets/", "install.sh", "VERSION"],
+  "scripts": {
+    "test": "bash tests/test_install.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
