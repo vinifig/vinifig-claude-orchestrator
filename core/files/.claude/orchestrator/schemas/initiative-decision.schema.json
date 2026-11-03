@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "initiative-decision",
+  "title": "/initiative-plan decision, read by /initiative-execute without interpretation",
+  "type": "object",
+  "required": ["initiative", "decision", "size", "why", "workstreams", "team", "tasks", "open_questions", "approvals_needed", "next_command"],
+  "properties": {
+    "initiative": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["task-execute", "epic-execute", "none"]},
+    "size": {"enum": ["S", "M", "L"]},
+    "why": {
+      "type": "object",
+      "required": ["deliverables", "workstreams", "dependencies", "steps"],
+      "properties": {
+        "deliverables": {"type": "integer"},
+        "workstreams": {"type": "integer"},
+        "dependencies": {"type": "boolean"},
+        "steps": {"type": "integer"},
+        "contract_change": {"type": "boolean"},
+        "external_input": {"type": "boolean"},
+        "ui": {"type": "boolean"},
+        "irreversible": {"type": "boolean"}
+      }
+    },
+    "workstreams": {"type": "array", "items": {"type": "string"}},
+    "team": {"type": "array", "items": {"type": "string"}, "description": "specialists chosen for the size (see orch.py team)"},
+    "epic_id": {"type": ["string", "null"]},
+    "board": {"enum": ["local", "github", "linear", null]},
+    "mode": {"enum": ["sequential-teams", "parallel", null]},
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "workstream", "blocked_by", "acceptance_criteria"],
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "workstream": {"type": "string"},
+          "size": {"enum": ["S", "M", "L"]},
+          "blocked_by": {"type": "array", "items": {"type": "string"}},
+          "labels": {"type": "array", "items": {"type": "string"}},
+          "acceptance_criteria": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "open_questions": {"type": "array", "items": {"type": "object", "required": ["question", "chosen_reading", "blocks"], "properties": {"question": {"type": "string"}, "chosen_reading": {"type": "string"}, "blocks": {"type": "boolean"}}}},
+    "approvals_needed": {"type": "array", "items": {"type": "string"}},
+    "next_command": {"type": "string", "minLength": 1}
+  }
+}

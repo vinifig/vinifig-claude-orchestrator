@@ -1,0 +1,27 @@
+{
+  "workstreams": {
+    "backend": {
+      "paths": ["src/server", "src/api", "server", "api", "apps/api", "apps/server", "packages/server"],
+      "arch_agent": "backend-arch-review",
+      "gates": ["{{PM_RUN_IF}} lint", "{{PM_RUN_IF}} typecheck", "{{PM_RUN_IF}} test"],
+      "ui": false,
+      "docs": ["README.md", "docs/"]
+    },
+    "frontend": {
+      "paths": ["src/app", "src/components", "src/pages", "app", "web", "apps/web", "apps/app", "packages/ui"],
+      "arch_agent": "frontend-arch-review",
+      "gates": ["{{PM_RUN_IF}} lint", "{{PM_RUN_IF}} typecheck", "{{PM_RUN_IF}} test", "{{PM_RUN_IF}} build"],
+      "ui": true,
+      "docs": ["README.md"]
+    },
+    "shared": {
+      "paths": ["src/lib", "src/shared", "packages/shared", "packages/core", "lib"],
+      "arch_agent": "arch-review",
+      "gates": ["{{PM_RUN_IF}} typecheck", "{{PM_RUN_IF}} test"],
+      "ui": false,
+      "docs": []
+    }
+  },
+  "gates": {"default": ["{{PM_RUN_IF}} test"]},
+  "ui": {"screenshots_dir": "docs/evidence"}
+}

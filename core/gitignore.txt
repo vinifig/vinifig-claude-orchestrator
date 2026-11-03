@@ -1,0 +1,6 @@
+# orchestrator: board and run state stay on this machine (plans in .ai/plans go to git)
+.ai/board/
+.ai/context/
+.ai/evals/runs/
+.claude/settings.local.json
+*.orchestrator-new

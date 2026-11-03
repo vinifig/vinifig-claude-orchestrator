@@ -1,0 +1,9 @@
+{
+  "id": "example",
+  "title": "Replace with a real, merged fix",
+  "base_ref": "<commit before the fix>",
+  "command": "/task-execute fix <the bug as it was reported>",
+  "checks": ["<test command that fails before the fix and passes after>"],
+  "reference_pr": "#<n>",
+  "notes": "copy to <id>.json and fill in"
+}

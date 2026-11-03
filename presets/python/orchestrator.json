@@ -1,0 +1,12 @@
+{
+  "workstreams": {
+    "app": {
+      "paths": ["src", "app"],
+      "arch_agent": "python-arch-review",
+      "gates": ["uv run ruff check .", "uv run ruff format --check .", "uv run pytest -q"],
+      "ui": false,
+      "docs": ["README.md", "docs/"]
+    }
+  },
+  "gates": {"default": ["uv run pytest -q"]}
+}

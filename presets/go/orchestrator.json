@@ -1,0 +1,12 @@
+{
+  "workstreams": {
+    "service": {
+      "paths": ["cmd", "internal", "pkg"],
+      "arch_agent": "go-arch-review",
+      "gates": ["test -z \"$(gofmt -l . | grep -v vendor/)\"", "go vet ./...", "go test -race ./...", "command -v golangci-lint >/dev/null && golangci-lint run || true"],
+      "ui": false,
+      "docs": ["README.md", "docs/"]
+    }
+  },
+  "gates": {"default": ["go test ./..."]}
+}

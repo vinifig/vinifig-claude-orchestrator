@@ -1,0 +1,1 @@
+{"description": "Go service: service workstream with gofmt, go vet, go test -race and golangci-lint when present"}

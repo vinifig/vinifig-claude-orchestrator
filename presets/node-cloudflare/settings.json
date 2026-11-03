@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(wrangler deploy:*)", "Bash(npx wrangler deploy:*)", "Bash(pnpm exec wrangler deploy:*)",
+      "Bash(wrangler pages deploy:*)", "Bash(npx wrangler pages deploy:*)", "Bash(pnpm exec wrangler pages deploy:*)",
+      "Bash(wrangler secret:*)", "Bash(npx wrangler secret:*)", "Bash(pnpm exec wrangler secret:*)",
+      "Bash(wrangler pages secret:*)", "Bash(npx wrangler pages secret:*)",
+      "Bash(wrangler d1 create:*)", "Bash(npx wrangler d1 create:*)",
+      "Bash(wrangler d1 migrations apply:*)", "Bash(npx wrangler d1 migrations apply:*)", "Bash(pnpm exec wrangler d1 migrations apply:*)",
+      "Bash(wrangler d1 execute:*)", "Bash(npx wrangler d1 execute:*)", "Bash(pnpm exec wrangler d1 execute:*)",
+      "Bash(wrangler kv:*)", "Bash(npx wrangler kv:*)",
+      "Bash(wrangler r2:*)", "Bash(npx wrangler r2:*)",
+      "Bash(wrangler versions deploy:*)", "Bash(wrangler rollback:*)", "Bash(wrangler delete:*)"
+    ],
+    "deny": [
+      "Read(./**/.dev.vars)",
+      "Read(./**/.dev.vars.*)"
+    ]
+  }
+}

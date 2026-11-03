@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-output",
+  "title": "Final block every orchestrator agent ends its reply with",
+  "type": "object",
+  "required": ["agent", "task", "status", "summary", "files", "gates", "risks", "next"],
+  "properties": {
+    "agent": {"type": "string", "minLength": 1},
+    "task": {"type": "string", "description": "task id, or '-' for ad hoc work"},
+    "status": {"enum": ["done", "blocked", "failed", "needs_input"]},
+    "summary": {"type": "string", "minLength": 1},
+    "files": {"type": "array", "items": {"type": "string"}, "description": "files written or changed (empty for read-only reviewers)"},
+    "artifacts": {"type": "array", "items": {"type": "string"}, "description": "reports, plans, screenshots written"},
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["command", "result"],
+        "properties": {
+          "command": {"type": "string"},
+          "result": {"enum": ["pass", "fail", "skipped"]},
+          "detail": {"type": "string"}
+        }
+      }
+    },
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "approvals_needed": {"type": "array", "items": {"type": "string"}, "description": "irreversible commands left for a person"},
+    "next": {"type": "string", "description": "what the orchestrator should do next"}
+  }
+}

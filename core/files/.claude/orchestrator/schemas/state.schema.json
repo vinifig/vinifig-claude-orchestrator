@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "state",
+  "title": ".ai/context/<epic>/state.json, written only by orch.py",
+  "type": "object",
+  "required": ["schema", "epic", "mode", "board", "base_branch", "created_at", "updated_at", "waves", "decisions", "approvals_pending"],
+  "properties": {
+    "schema": {"const": 1},
+    "epic": {"type": "string", "minLength": 1},
+    "title": {"type": "string"},
+    "mode": {"enum": ["sequential-teams", "parallel"]},
+    "board": {"enum": ["local", "github", "linear"]},
+    "base_branch": {"type": "string"},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"},
+    "waves": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["n", "tasks"],
+        "properties": {
+          "n": {"type": "integer"},
+          "tasks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "workstream", "status", "step", "branch", "base", "pr", "rounds", "files"],
+              "properties": {
+                "id": {"type": "string"},
+                "title": {"type": "string"},
+                "workstream": {"type": "string"},
+                "size": {"type": "string"},
+                "status": {"enum": ["pending", "in-progress", "done", "skipped", "blocked"]},
+                "step": {"enum": ["context", "specialists", "plan", "red", "green", "ui", "audit", "pr", "done"]},
+                "branch": {"type": "string"},
+                "base": {"type": "string"},
+                "pr": {"type": ["integer", "string", "null"]},
+                "plan": {"type": "string"},
+                "files": {"type": "array", "items": {"type": "string"}},
+                "rounds": {"type": "integer"},
+                "team": {"type": "array", "items": {"type": "string"}},
+                "verdict": {"type": "string"},
+                "note": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "decisions": {"type": "array"},
+    "approvals_pending": {"type": "array"},
+    "discovered": {"type": "array"}
+  }
+}

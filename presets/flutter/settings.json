@@ -1,0 +1,6 @@
+{
+  "permissions": {
+    "ask": ["Bash(fastlane:*)", "Bash(bundle exec fastlane:*)", "Bash(flutter pub publish:*)", "Bash(dart pub publish:*)", "Bash(firebase deploy:*)", "Bash(firebase appdistribution:*)"],
+    "allow": ["Bash(flutter analyze:*)", "Bash(flutter test:*)", "Bash(dart format:*)"]
+  }
+}

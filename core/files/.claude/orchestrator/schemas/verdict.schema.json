@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verdict",
+  "title": "Auditor verdict (plan-verify, review agents in review mode, ui-review)",
+  "type": "object",
+  "required": ["agent", "task", "status", "summary", "files", "gates", "risks", "next", "verdict", "score", "rubric", "fixes"],
+  "properties": {
+    "agent": {"type": "string"},
+    "task": {"type": "string"},
+    "status": {"enum": ["done", "blocked", "failed", "needs_input"]},
+    "summary": {"type": "string", "minLength": 1},
+    "files": {"type": "array"},
+    "gates": {
+      "type": "array",
+      "items": {"type": "object", "required": ["command", "result"], "properties": {"command": {"type": "string"}, "result": {"enum": ["pass", "fail", "skipped"]}}}
+    },
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "next": {"type": "string"},
+    "verdict": {"enum": ["APPROVED", "PARTIAL", "REJECTED"]},
+    "score": {"type": "number", "description": "weighted rubric score 0-10"},
+    "rubric": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["criterion", "weight", "score", "evidence"],
+        "properties": {
+          "criterion": {"type": "string"},
+          "weight": {"type": "number"},
+          "score": {"type": "number"},
+          "blocking": {"type": "boolean"},
+          "evidence": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "fixes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "change"],
+        "properties": {"file": {"type": "string"}, "change": {"type": "string"}, "owner": {"enum": ["code-implement", "tests-implement", "plan-design", "docs-write"]}}
+      }
+    }
+  }
+}

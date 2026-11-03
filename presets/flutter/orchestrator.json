@@ -1,0 +1,35 @@
+{
+  "workstreams": {
+    "presentation": {
+      "paths": ["lib/presentation", "lib/ui", "lib/features", "lib/widgets", "lib/screens", "widgetbook"],
+      "arch_agent": "flutter-arch-review",
+      "gates": ["dart format --output=none --set-exit-if-changed lib test", "flutter analyze", "flutter test"],
+      "ui": true,
+      "docs": ["README.md"]
+    },
+    "domain": {
+      "paths": ["lib/domain", "lib/core"],
+      "arch_agent": "flutter-arch-review",
+      "gates": ["dart format --output=none --set-exit-if-changed lib test", "flutter analyze", "flutter test"],
+      "ui": false,
+      "docs": []
+    },
+    "data": {
+      "paths": ["lib/data", "lib/infrastructure", "lib/repositories", "lib/services"],
+      "arch_agent": "flutter-arch-review",
+      "gates": ["dart format --output=none --set-exit-if-changed lib test", "flutter analyze", "flutter test"],
+      "ui": false,
+      "docs": []
+    },
+    "platform": {
+      "paths": ["android", "ios", "macos", "linux", "windows", "web"],
+      "arch_agent": "platform-native-arch-review",
+      "gates": ["flutter analyze", "flutter test", "flutter build apk --debug --target-platform android-arm64"],
+      "ui": true,
+      "docs": ["README.md"]
+    }
+  },
+  "gates": {"default": ["flutter analyze", "flutter test"]},
+  "guards": {"secret_paths": ["key.properties", "*.keystore", "*.jks", "*.p8", "*.mobileprovision", "AuthKey_*.p8", "lib/firebase_options*.dart.local"]},
+  "ui": {"screenshots_dir": "docs/evidence"}
+}

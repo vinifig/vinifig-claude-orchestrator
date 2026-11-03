@@ -1,0 +1,82 @@
+{
+  "language": "English",
+  "approver": "the repository owner",
+  "board": {
+    "default": "local",
+    "github_repo": "",
+    "linear_team": ""
+  },
+  "branches": {
+    "protected": ["main", "master"],
+    "feature_prefix": "feat/",
+    "fix_prefix": "fix/"
+  },
+  "commit_style": "conventional commits: <type>(<workstream>): <summary>",
+  "workstreams": {},
+  "gates": {
+    "always": [],
+    "default": [],
+    "on_subagent_stop": ["code-implement"]
+  },
+  "teams": {
+    "S": {
+      "specialists": ["arch"],
+      "tests_review_in_plan": true,
+      "audit_rounds": 1,
+      "models": {"arch": "sonnet", "plan-design": "sonnet", "plan-verify": "sonnet", "tests-implement": "sonnet", "code-implement": "sonnet"},
+      "when_label": {"external-input": ["security-review"], "db": ["db-review"], "ui": ["ui-validate"]}
+    },
+    "M": {
+      "specialists": ["arch", "tests-review"],
+      "tests_review_in_plan": false,
+      "audit_rounds": 2,
+      "models": {"arch": "opus", "tests-review": "sonnet", "plan-design": "opus", "plan-verify": "opus", "tests-implement": "sonnet", "code-implement": "sonnet"},
+      "when_label": {"external-input": ["security-review"], "auth": ["security-review"], "db": ["db-review"], "ui": ["ui-validate", "ui-review"], "perf": ["perf-review"]}
+    },
+    "L": {
+      "specialists": ["arch", "tests-review", "security-review"],
+      "tests_review_in_plan": false,
+      "audit_rounds": 2,
+      "models": {"arch": "opus", "tests-review": "opus", "security-review": "opus", "plan-design": "opus", "plan-verify": "opus", "tests-implement": "sonnet", "code-implement": "sonnet"},
+      "when_label": {"db": ["db-review"], "ui": ["ui-validate", "ui-review"], "perf": ["perf-review"]}
+    }
+  },
+  "structured_output": {
+    "agents": ["plan-design", "plan-verify", "code-implement", "tests-implement", "tests-review", "security-review", "db-review", "perf-review", "docs-write", "arch-review", "*-arch-review"],
+    "schemas": {"plan-design": "plan-output", "plan-verify": "verdict"}
+  },
+  "hooks": {
+    "max_blocks": 2,
+    "gate_timeout_seconds": 900
+  },
+  "guards": {
+    "protected_branches": ["main", "master"],
+    "secret_paths": [],
+    "secret_allow": [],
+    "bash_deny": [],
+    "bash_ask": []
+  },
+  "parallel": {
+    "max_concurrent": 3,
+    "worktree_dir": "../{repo}-worktrees"
+  },
+  "workflows": {
+    "specialists": false,
+    "audit": false
+  },
+  "investigate": {
+    "agent_teams": "auto"
+  },
+  "ui": {
+    "validate": "auto",
+    "screenshots_dir": "docs/evidence"
+  },
+  "cost": {
+    "usd_per_mtok": {}
+  },
+  "evals": {
+    "permission_mode": "acceptEdits",
+    "allowed_tools": ["Read", "Edit", "Write", "Glob", "Grep", "Bash(git:*)", "Agent", "Skill"],
+    "timeout_seconds": 5400
+  }
+}

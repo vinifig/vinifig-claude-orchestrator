@@ -1,0 +1,22 @@
+{
+  "workstreams": {
+    "edge": {
+      "paths": ["workers", "functions", "src/worker", "apps/worker", "migrations", "wrangler.toml", "wrangler.jsonc"],
+      "arch_agent": "cloudflare-arch-review",
+      "gates": ["{{PM_RUN_IF}} typecheck", "{{PM_RUN_IF}} test", "{{PM_EXEC}} wrangler deploy --dry-run --outdir .wrangler/dry-run"],
+      "ui": false,
+      "docs": ["README.md", "docs/"]
+    }
+  },
+  "guards": {
+    "secret_paths": [".dev.vars", ".dev.vars.*", ".env.cloudflare*", "wrangler.toml.local"],
+    "bash_ask": [
+      {"pattern": "wrangler(\\s+\\S+)*\\s+(deploy|publish)(?!.*--dry-run)", "reason": "Cloudflare deploy: needs the approver's written yes in the conversation."},
+      {"pattern": "wrangler\\s+pages\\s+deploy", "reason": "Cloudflare Pages deploy: needs the approver's written yes."},
+      {"pattern": "wrangler\\s+(pages\\s+)?secret", "reason": "Cloudflare secret change: needs the approver's written yes."},
+      {"pattern": "wrangler\\s+d1\\s+(create|delete|export|migrations\\s+apply|execute)(?!.*--local)", "reason": "Remote D1 operation: needs the approver's written yes (use --local for local work)."},
+      {"pattern": "wrangler\\s+(kv|r2|queues|vectorize|hyperdrive)\\b", "reason": "Remote Cloudflare storage change: needs the approver's written yes."},
+      {"pattern": "wrangler\\s+(versions\\s+deploy|rollback|delete|routes|dns)", "reason": "Cloudflare release/routing change: needs the approver's written yes."}
+    ]
+  }
+}

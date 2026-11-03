@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plan-output",
+  "title": "plan-design final block",
+  "type": "object",
+  "required": ["agent", "task", "status", "summary", "files", "gates", "risks", "next", "plan_path", "branch", "files_touched", "steps", "red_tests"],
+  "properties": {
+    "agent": {"const": "plan-design"},
+    "task": {"type": "string"},
+    "status": {"enum": ["done", "blocked", "failed", "needs_input"]},
+    "summary": {"type": "string", "minLength": 1},
+    "files": {"type": "array", "items": {"type": "string"}},
+    "gates": {"type": "array"},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "next": {"type": "string"},
+    "plan_path": {"type": "string", "minLength": 1},
+    "branch": {"type": "string", "minLength": 1},
+    "files_touched": {"type": "array", "items": {"type": "string"}, "description": "every production and test file the plan creates or changes; parallel mode groups tasks by this"},
+    "steps": {"type": "integer"},
+    "red_tests": {"type": "integer"},
+    "open_questions": {"type": "array", "items": {"type": "string"}},
+    "approvals_needed": {"type": "array", "items": {"type": "string"}}
+  }
+}

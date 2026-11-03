@@ -1,0 +1,1 @@
+{"description": "Node/TypeScript on Cloudflare (Workers, Pages + Functions, D1, KV, R2, Access): adds the edge workstream, and every wrangler command that deploys, sets secrets or touches remote data needs a person's approval", "extends": ["node"]}
